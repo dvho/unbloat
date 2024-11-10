@@ -1,0 +1,33 @@
+{
+    "name": "unbloat",
+    "version": "1.0.0",
+    "description": "Unbloat will purge and expunge unnecessary file weight from your git repository.",
+    "main": "unbloat.js",
+    "files": [
+      "unbloat.js",
+      "package.json"
+    ],
+    "scripts": {
+      "postinstall": "node scripts/postinstall.js"
+    },
+    "keywords": [
+      "git",
+      "repository",
+      "bloat",
+      "file weight",
+      "file size",
+      "purge",
+      "expunge",
+      "remove",
+      "delete",
+      "clean",
+      "cleanup",
+      "optimize",
+      "minimize",
+      "reduce",
+      "shrink",
+      "compress"
+    ],
+    "author": "David H.",
+    "license": "MIT"
+  }
