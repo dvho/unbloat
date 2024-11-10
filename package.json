@@ -1,11 +1,13 @@
 {
     "name": "unbloat",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Unbloat will purge and expunge unnecessary file weight from your git repository.",
     "main": "unbloat.js",
     "files": [
       "unbloat.js",
-      "package.json"
+      "postinstall.js",
+      "package.json",
+      "readme.md"
     ],
     "scripts": {
       "postinstall": "node scripts/postinstall.js"
