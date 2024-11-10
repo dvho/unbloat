@@ -1,6 +1,6 @@
 {
     "name": "unbloat",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Unbloat will purge and expunge unnecessary file weight from your git repository.",
     "main": "unbloat.js",
     "files": [
@@ -10,25 +10,16 @@
       "readme.md"
     ],
     "scripts": {
-      "postinstall": "node scripts/postinstall.js"
+      "postinstall": "node postinstall.js"
     },
     "keywords": [
       "git",
-      "repository",
-      "bloat",
-      "file weight",
-      "file size",
-      "purge",
-      "expunge",
-      "remove",
-      "delete",
       "clean",
-      "cleanup",
       "optimize",
-      "minimize",
+      "compress",
       "reduce",
-      "shrink",
-      "compress"
+      "minimize",
+      "shrink"
     ],
     "author": "David H.",
     "license": "MIT"
