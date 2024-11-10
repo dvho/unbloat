@@ -1,6 +1,6 @@
 {
     "name": "unbloat",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Unbloat will purge and expunge unnecessary file weight from your git repository.",
     "main": "unbloat.js",
     "files": [
