@@ -1,26 +1,32 @@
 {
-    "name": "unbloat",
-    "version": "1.0.6",
-    "description": "Unbloat will purge and expunge unnecessary file weight from your git repository.",
-    "main": "unbloat.js",
-    "files": [
-      "unbloat.js",
-      "postinstall.js",
-      "package.json",
-      "readme.md"
-    ],
-    "scripts": {
-      "postinstall": "node postinstall.js"
-    },
-    "keywords": [
-      "git",
-      "clean",
-      "optimize",
-      "compress",
-      "reduce",
-      "minimize",
-      "shrink"
-    ],
-    "author": "David H.",
-    "license": "MIT"
-  }
+  "name": "unbloat",
+  "version": "1.0.7",
+  "description": "Unbloat maximizes the security posture of your repository and purges unnecessary file weight without compromising commit and commit message history.",
+  "main": "unbloat.js",
+  "files": [
+    "unbloat.js",
+    "postinstall.js",
+    "package.json",
+    "readme.md"
+  ],
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  },
+  "keywords": [
+    "git",
+    "security",
+    "safety",
+    "performance",
+    "efficiency",
+    "clean",
+    "optimize",
+    "compress",
+    "reduce",
+    "minimize",
+    "shrink",
+    "purge",
+    "expunge"
+  ],
+  "author": "David H.",
+  "license": "MIT"
+}
