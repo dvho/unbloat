@@ -7,6 +7,7 @@ const readline = require('readline')
 
 /*    Object to map 8 bit colors for formatOutput function    */
 const colorMap = { // This object contains 8 bit colors for styling the output of the formatOutput function, colors are from    https://devmemo.io/cheatsheets/terminal_escape_code/    ...
+    red1: '\x1b[1m\x1b[38;5;196m',
     white: '\x1b[1m\x1b[38;5;15m',
     orange3: '\x1b[1m\x1b[38;5;172m',
     darkCyan: '\x1b[1m\x1b[38;5;36m',
@@ -70,7 +71,7 @@ const execCommand = (command, options = {}) => { // This function takes a comman
 }
 
 
-// /*    Function to spawn a command and provide real-time feedback    */
+/*    Function to spawn a command and provide real-time feedback    */
 const spawnCommand = (command, args = [], options = {}) => { //This function takes a command, arguments, and optional options as arguments and returns a Promise...
 
     return new Promise((resolve, reject) => { //...which takes two arguments, resolve and reject...
@@ -140,17 +141,24 @@ const processBranchesInBatches = async (branches, batchSize, processFunc) => { /
 
 
 
-/* Function to check if there are uncommitted changes */
-const hasUncommittedChanges = async (rootDir) => {
-    try {
-        const statusCommand = `git -C ${rootDir} status --porcelain`;
-        const statusOutput = await execCommand(statusCommand);
-        return statusOutput.length > 0; // Returns true if there are uncommitted changes
-    } catch (error) {
-        console.error(`Failed to check for uncommitted changes: ${error}`);
-        throw error;
+/*    Function to check if there are uncommitted changes    */
+const hasUncommittedChanges = async rootDir => { // This function takes rootDir as an argument...
+
+    try { //...and returns a Promise...
+
+        const statusCommand = `git -C ${rootDir} status --porcelain` //...which sets the statusCommand to check for uncommitted changes...
+        
+        const statusOutput = await execCommand(statusCommand) //...executes the statusCommand to check for uncommitted changes...
+
+        return statusOutput.length > 0 //...and returns true if there are uncommitted changes, otherwise false
+
+    } catch (error) { //...if an error occurs...
+
+        console.error(`Failed to check for uncommitted changes: ${error}`) //...logs the error to the console...
+
+        throw error //...and throws the error
     }
-};
+}
 
 
 /*    Function to prompt the user for an action    */ 
@@ -289,13 +297,16 @@ const main = async () => { // This function returns a Promise...
 
         } else if (answer === '2') { //...otherwise checks if the user's answer is '2'...
 
-            const uncommittedChanges = await hasUncommittedChanges(rootDir);
-            if (uncommittedChanges) {
-                console.log('You have uncommitted changes. Please commit or stash them before proceeding.');
-                return; // Exit if there are uncommitted changes
-            };
+            const uncommittedChanges = await hasUncommittedChanges(rootDir) //...and checks if there are uncommitted changes...
 
-            const escapedFiles = removedFiles.map(file => escapeFileName(file)) //...and escapes spaces, brackets, and parentheses in the file names...
+            if (uncommittedChanges) { //...if there are uncommitted changes...
+
+                console.log(`\n${colorMap.red1}You have uncommitted changes. Please commit or stash them before proceeding.${colorMap.endColor}\n`) //...logs that the user has uncommitted changes and should commit or stash them before proceeding...
+
+                return //...and returns from the function, effectively stopping the script if there are uncommitted changes...
+            }
+
+            const escapedFiles = removedFiles.map(file => escapeFileName(file)) //...otherwise uses escapeFileName function to escape spaces, brackets, and parentheses in the file names...
             
             const deleteCommand = 'git' //...defines the deleteCommand as simply git...
 
