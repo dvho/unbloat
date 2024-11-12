@@ -5,18 +5,29 @@ const readline = require('readline')
 
 
 
+/*    Object to map 8 bit colors for formatOutput function    */
+const colorMap = { // This object contains 8 bit colors for styling the output of the formatOutput function, colors are from    https://devmemo.io/cheatsheets/terminal_escape_code/    ...
+    white: '\x1b[1m\x1b[38;5;15m',
+    orange3: '\x1b[1m\x1b[38;5;172m',
+    darkCyan: '\x1b[1m\x1b[38;5;36m',
+    deepSkyBlue1: '\x1b[1m\x1b[38;5;39m',
+    dodgerBlue1: '\x1b[1m\x1b[38;5;33m',
+    endColor: '\x1b[0m' //...where endColor resets the color to the default
+}
+
+
 /*    Function to format the output of the command    */
 const formatOutput = data => { // This function takes data as an argument...
 
     return data.split('\n').map(line => { //...and splits the data by newline characters, then maps over the resulting array...
 
-        const rewriteMatch = line.match(/^Rewrite\s+([a-f0-9]+)\s+\((\d+)\/(\d+)\)\s+\((\d+)\s+seconds?\s+passed,\s+remaining\s+(\d+)\s+predicted\)(?:\s+.*)?$/) //...then checks if the line matches the rewrite regex...
+        const rewriteMatch = line.replace(/\r/g, '').match(/^Rewrite\s+([a-f0-9]+)\s+\((\d+)\/(\d+)\)\s+\((\d+)\s+seconds?\s+passed,\s+remaining\s+(\d+)\s+predicted\)(?:\s+.*)?$/) //...then checks if the line matches this regex...
 
         if (rewriteMatch) { //...and if it does...
 
             const [_, hash, current, total, secondsPassed, secondsRemaining] = rewriteMatch //...extracts the hash, current, total, secondsPassed, and secondsRemaining...
 
-            return `Rewrite: ${hash}\nCurrent operation: ${current} / ${total}\nTime passed: ${formatTime(secondsPassed)}\nTime remaining: ${formatTime(secondsRemaining)}\n` //...and returns the formatted rewrite output
+            return `\n ${colorMap.white}Rewrite: ${colorMap.orange3}${hash}${colorMap.white}\n Current operation: ${colorMap.darkCyan}${current}${colorMap.white} / ${colorMap.darkCyan}${total}${colorMap.white}\n Time passed: ${colorMap.deepSkyBlue1}${formatTime(secondsPassed)}${colorMap.white}\n Time remaining: ${colorMap.dodgerBlue1}${formatTime(secondsRemaining)}${colorMap.endColor}\n\n` //...and returns the formatted rewrite output complete with colors from the colorMap...
         }
 
         return line //...otherwise returns the line as is...
@@ -152,7 +163,7 @@ const promptUser = () => { // This function returns a Promise...
             output: process.stdout //...and the output set to process.stdout
         })
 
-        rl.question('Would you like to:\n (1) see a list of the removed files\n (2) permanently delete all the removed files from the project\'s history\n ', answer => { //...then prompts the user with a question...
+        rl.question('Would you like to:\n (1) see a list of the removed files\n (2) permanently delete all the removed files from the project\'s history\n  ', answer => { //...then prompts the user with a question...
 
             rl.close() ///...and closes the readline interface
             resolve(answer) //...and resolves the Promise with the user's answer
