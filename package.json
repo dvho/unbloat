@@ -1,12 +1,12 @@
 {
   "name": "unbloat",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Unbloat maximizes the security posture of your repository and purges unnecessary file weight without compromising commit and commit message history.",
   "main": "unbloat.js",
   "files": [
-    "unbloat.js",
-    "postinstall.js",
     "package.json",
+    "postinstall.js",
+    "unbloat.js",
     "readme.md"
   ],
   "scripts": {

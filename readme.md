@@ -19,7 +19,7 @@ npm run unbloat
 ## Installation
 With [npm](http://npmjs.org) do
 ```bash
-$ npm install unbloat
+$ npm install unbloat --save-dev
 ```
 
 ## License
